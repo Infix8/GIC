@@ -290,6 +290,20 @@ a {
 .flower-logo.large {
     width: 300px;
     height: 300px;
+    /* Reverted scale as user meant navbar logo */
+}
+
+/* Navbar Logo specific fix */
+.navbar-logo img {
+    height: 60px;
+    /* Increased from default/previous value */
+    /* If it was smaller, this should make it bigger. Default might have been 40px or 50px */
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.navbar-logo img:hover {
+    transform: scale(1.1);
 }
 
 .logo-glow-container {
