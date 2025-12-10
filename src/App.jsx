@@ -38,9 +38,11 @@ function App() {
     );
 
     animateElements.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      // el.style.opacity = '0'; // Commented out to prevent visibility issues
+      // el.style.transform = 'translateY(30px)';
+      el.classList.add('fade-init'); // Add a class instead if we want to validly handle it in CSS, or just let it be visible.
+      // For now, I will just observe. If we want animation, we should do it in CSS.
+      // To ensure it displays, I am disabling the JS hide.
       observer.observe(el);
     });
   }, []);
