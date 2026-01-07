@@ -1,16 +1,108 @@
-# React + Vite
+# SMEC's Global Innovators Conclave 2026
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive web application for SMEC's Global Innovators Conclave 2026 event.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React 19, TypeScript, Vite
+- **Styling**: Tailwind CSS, GSAP animations
+- **Backend**: Node.js, Express
+- **Database**: Supabase
+- **Authentication**: Supabase Auth
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js 18+ 
+- npm or yarn
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installation
+
+```bash
+npm install
+```
+
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+EMAIL_USER=your_email
+EMAIL_PASS=your_email_password
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## Deployment
+
+### Vercel Deployment
+
+1. Push your code to GitHub: `https://github.com/Infix8/GIC.git`
+2. Import your repository in Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
+
+The `vercel.json` file is already configured for Vercel deployment.
+
+### Environment Variables for Vercel
+
+Make sure to add all environment variables in the Vercel dashboard:
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `EMAIL_USER`
+- `EMAIL_PASS`
+
+## Project Structure
+
+```
+├── src/
+│   ├── components/     # React components
+│   ├── pages/          # Page components
+│   ├── hooks/          # Custom React hooks
+│   ├── lib/            # Utilities and configurations
+│   └── index.css       # Global styles
+├── public/             # Static assets
+├── vercel.json         # Vercel configuration
+└── package.json        # Dependencies
+```
+
+## Features
+
+- Responsive design
+- GSAP animations
+- Supabase authentication
+- Email functionality
+- Event registration
+- Agenda management
+- Speaker profiles
+- Sponsor information
+
+## License
+
+Unlicense
+
+## Contact
+
+- LinkedIn: [Global Innovators Conclave](https://www.linkedin.com/in/global-innovators-conclave-01a1903a5)
+- GitHub: [Infix8/GIC](https://github.com/Infix8/GIC.git)

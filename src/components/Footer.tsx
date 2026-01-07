@@ -6,7 +6,7 @@ const Footer = () => {
             <div className="footer-content">
                 <div className="footer-logo">
                     <span className="footer-title">SMEC's Global Innovators Conclave</span>
-                    <span className="footer-tagline">Rising Minds For Global Impact</span>
+                    <span className="footer-tagline">Innovating for India, Scaling to the world</span>
                 </div>
                 <div className="footer-bottom">
                     <p>

@@ -1,6 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
+    const navigate = useNavigate();
+    const heroRef = useRef<HTMLElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
         hours: 0,
@@ -8,10 +16,9 @@ const Hero = () => {
         seconds: 0
     });
 
+    // Countdown timer
     useEffect(() => {
-        // Set date to Feb 27, 2026
         const targetDate = new Date('2026-02-27T00:00:00').getTime();
-
         const interval = setInterval(() => {
             const now = new Date().getTime();
             const distance = targetDate - now;
@@ -27,96 +34,129 @@ const Hero = () => {
                 });
             }
         }, 1000);
-
         return () => clearInterval(interval);
     }, []);
 
+    // GSAP Animations
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Title reveal animation
+            gsap.from('.hero-title-line', {
+                y: 80,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.12,
+                ease: 'power3.out',
+                delay: 0.2,
+            });
+
+            // Metadata fade in
+            gsap.from('.hero-meta', {
+                y: 20,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.08,
+                ease: 'power2.out',
+                delay: 0.6,
+            });
+
+            // Stats cards - all appear simultaneously, smooth fade and scale
+            gsap.set('.stat-card', { opacity: 0, scale: 0.9 });
+            gsap.to('.stat-card', {
+                opacity: 1,
+                scale: 1,
+                duration: 0.6,
+                ease: 'power2.out',
+                delay: 1,
+            });
+
+            // CTA buttons
+            gsap.from('.hero-cta', {
+                y: 30,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+                delay: 0.8,
+            });
+
+        }, heroRef);
+
+        return () => ctx.revert();
+    }, []);
+
     const stats = [
-        { label: "Visitors", value: "10k+", icon: "👥" },
-        { label: "Startups", value: "1k+", icon: "🚀" },
-        { label: "Investors", value: "100+", icon: "💰" },
-        { label: "Mentors", value: "100+", icon: "🧠" },
-        { label: "Speakers", value: "200+", icon: "🎙️" },
-        { label: "Exhibitors", value: "50+", icon: "🏢" }
+        { label: "Visitors", value: "10K+", number: "01" },
+        { label: "Startups", value: "1K+", number: "02" },
+        { label: "Investors", value: "100+", number: "03" },
+        { label: "Speakers", value: "200+", number: "04" },
+        { label: "Sessions", value: "50+", number: "05" },
+        { label: "Partners", value: "30+", number: "06" },
     ];
 
     return (
-        <section className="hero-section" id="hero">
-            {/* Main Content Area */}
-            <div className="hero-main-display">
-                {/* Visual Left: Conclave Sphere 3D Element */}
-                <div className="hero-visual-left">
-                    <div className="conclave-sphere">
-                        <div className="sphere-core"></div>
-                        <div className="sphere-ring ring-1"></div>
-                        <div className="sphere-ring ring-2"></div>
-                        <div className="sphere-ring ring-3"></div>
-                        <div className="sphere-particle sp-1"></div>
-                        <div className="sphere-particle sp-2"></div>
-                        <div className="sphere-particle sp-3"></div>
+        <section ref={heroRef} className="hero-section-light" id="hero">
+            {/* Main content area */}
+            <div className="hero-content-light">
+                {/* Massive title */}
+                <h1 ref={titleRef} className="hero-title-light">
+                    <span className="hero-title-line overflow-hidden block">
+                        <span className="inline-block">GLOBAL</span>
+                    </span>
+                    <span className="hero-title-line overflow-hidden block">
+                        <span className="inline-block">INNOVATORS</span>
+                    </span>
+                    <span className="hero-title-line overflow-hidden block">
+                        <span className="inline-block text-accent">CONCLAVE</span>
+                    </span>
+                </h1>
+
+                {/* Tagline */}
+                <p className="hero-tagline hero-meta">
+                    Innovating for India, Scaling to the world
+                </p>
+
+                {/* Event details - horizontal */}
+                <div className="hero-details-light">
+                    <div className="hero-meta detail-item">
+                        <span className="detail-label">Date</span>
+                        <span className="detail-value">Feb 27-28, 2026</span>
+                    </div>
+                    <span className="detail-divider">•</span>
+                    <div className="hero-meta detail-item">
+                        <span className="detail-label">Location</span>
+                        <span className="detail-value">St. Martin's Engineering College, Hyderabad</span>
+                    </div>
+                    <span className="detail-divider">•</span>
+                    <div className="hero-meta detail-item">
+                        <span className="detail-label">Countdown</span>
+                        <span className="detail-value font-mono">
+                            {timeLeft.days}D {timeLeft.hours}H {timeLeft.minutes}M
+                        </span>
                     </div>
                 </div>
 
-                {/* Text Layout */}
-                <div className="hero-text-content">
-                    <div className="coming-soon-badge">
-                        <span className="pulse-dot"></span>
-                        <span>Global Summit 2026</span>
-                    </div>
-
-                    {/* Header Row: Calendar + Title */}
-                    <div className="hero-header-row">
-                        {/* Calendar Widget (Left Side) */}
-                        <div className="calendar-widget">
-                            <div className="cal-header">STARTS IN</div>
-                            <div className="cal-body">
-                                <div className="cal-days">{String(timeLeft.days).padStart(2, '0')}</div>
-                                <div className="cal-label">DAYS</div>
-                                <div className="cal-small-timer">
-                                    <span>{String(timeLeft.hours).padStart(2, '0')}</span>:
-                                    <span>{String(timeLeft.minutes).padStart(2, '0')}</span>:
-                                    <span>{String(timeLeft.seconds).padStart(2, '0')}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Title */}
-                        <h1 className="hero-title">
-                            <span className="block-title">WHERE</span>
-                            <span className="block-title highlight">INNOVATION</span>
-                            <span className="block-title">MEETS IMPACT</span>
-                        </h1>
-                    </div>
-
-                    <div className="hero-event-details">
-                        <h2 className="event-name">SMEC's Global Innovators Conclave</h2>
-                        <div className="event-meta">
-                            <span className="meta-item"><i className="icon">📅</i> Feb 27-28, 2026</span>
-                            <span className="meta-item"><i className="icon">📍</i> Hyderabad, India</span>
-                        </div>
-                    </div>
-
-                    <div className="hero-cta-group">
-                        <a href="#contact" className="cta-button primary">Register Now</a>
-                        <a href="#agenda" className="cta-button secondary">Explore Agenda</a>
-                    </div>
+                {/* CTA buttons */}
+                <div className="hero-cta-group-light">
+                    <button 
+                        onClick={() => navigate('/register')}
+                        className="hero-cta cta-primary-light"
+                    >
+                        Register Now
+                        <span className="cta-arrow">→</span>
+                    </button>
+                    <a href="#about" className="hero-cta cta-secondary-light">
+                        Learn More
+                    </a>
                 </div>
             </div>
 
-            {/* Stats Grid */}
-            <div className="hero-stats-grid">
+            {/* Stats row - bottom */}
+            <div className="hero-stats-light">
                 {stats.map((stat, index) => (
-                    <div key={index} className="stat-card" style={{ animationDelay: `${index * 100}ms` }}>
-                        <div className="stat-content">
-                            <span className="stat-value">{stat.value}</span>
-                            <span className="stat-label">{stat.label}</span>
-                        </div>
-                        {/* Creative Element: Tech Pulse Line (Optional, kept for subtle detail) */}
-                        <div className="tech-pulse-container">
-                            <svg className="tech-pulse-line" viewBox="0 0 100 20" preserveAspectRatio="none">
-                                <path d="M0,20 L0,10 Q20,20 40,10 T80,10 T100,20 V20 Z" className="pulse-path" />
-                            </svg>
-                        </div>
+                    <div key={index} className="stat-card stat-card-light">
+                        <span className="stat-value-light">{stat.value}</span>
+                        <span className="stat-label-light">{stat.label}</span>
                     </div>
                 ))}
             </div>

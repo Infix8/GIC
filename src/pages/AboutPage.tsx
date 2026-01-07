@@ -4,82 +4,42 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const About = () => {
-    const sectionRef = useRef<HTMLElement>(null);
+const AboutPage = () => {
+    const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Check if section is already in viewport on load
-            const checkInView = () => {
-                if (!sectionRef.current) return false;
-                const rect = sectionRef.current.getBoundingClientRect();
-                return rect.top < window.innerHeight * 0.9;
-            };
-            
-            const isAlreadyInView = checkInView();
-            
-            if (isAlreadyInView) {
-                // If already in view, make visible immediately - no animation needed
-                gsap.set(['.about-block', '.about-title'], { opacity: 1, y: 0 });
-            } else {
-                // Set initial state for animation
-                gsap.set('.about-block', { opacity: 0, y: 30 });
-                gsap.set('.about-title', { opacity: 0, y: 20 });
-                
-                // Animate section title - optimized for performance
-                gsap.to('.about-title', {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.4,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 90%',
-                        once: true,
-                        markers: false,
-                    }
-                });
-
-                // Animate content blocks with minimal stagger for faster appearance
-                gsap.to('.about-block', {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.4,
-                    stagger: 0.05,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: '.about-content',
-                        start: 'top 90%',
-                        toggleActions: 'play none none none',
-                        once: true,
-                        markers: false,
-                    }
-                });
-            }
-        }, sectionRef);
+            gsap.from('.about-animate', {
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15,
+                ease: 'power3.out',
+            });
+        }, pageRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={sectionRef} className="section about-section" id="about">
-            {/* Section header with number */}
-            <div className="section-header-new">
-                <span className="section-number font-mono text-xs text-gray-500 tracking-widest">[01]</span>
-                <h2 className="about-title section-title-new">ABOUT THE CONCLAVE</h2>
-            </div>
+        <div ref={pageRef} className="page-container">
+            <section className="section">
+                {/* Header */}
+                <div className="section-header-new about-animate">
+                    <span className="section-number font-mono text-xs text-gray-500 tracking-widest">[ABOUT]</span>
+                    <h1 className="section-title-new">ABOUT THE CONCLAVE</h1>
+                </div>
 
-            <div className="about-content">
-                {/* Mission statement - large text */}
-                <div className="about-block about-mission">
+                {/* Mission */}
+                <div className="about-animate mb-16" style={{ maxWidth: '900px' }}>
                     <p className="mission-text">
                         SMEC's Global Innovators Conclave 2026 is a high-impact summit uniting founders, researchers, startups, government, corporates, investors, and academia to accelerate deep-tech innovation and entrepreneurship through exhibitions, pitch sessions, talks, and investor matchmaking.
                     </p>
                 </div>
 
-                {/* Info cards */}
-                <div className="about-grid">
-                    <div className="about-block about-card-new">
+                {/* Info Cards */}
+                <div className="about-grid about-animate">
+                    <div className="about-card-new">
                         <span className="card-number font-mono text-xs text-gray-400">[A]</span>
                         <h3 className="card-title">Organized By</h3>
                         <p className="card-highlight">St. Martin's Engineering College</p>
@@ -87,7 +47,7 @@ const About = () => {
                         <p className="card-detail">NAAC A+ Accredited</p>
                     </div>
 
-                    <div className="about-block about-card-new">
+                    <div className="about-card-new">
                         <span className="card-number font-mono text-xs text-gray-400">[B]</span>
                         <h3 className="card-title">Recognition</h3>
                         <p className="card-highlight">ARIIA & NIRF Ranked</p>
@@ -95,14 +55,14 @@ const About = () => {
                         <p className="card-detail">Excellence in Entrepreneurship</p>
                     </div>
 
-                    <div className="about-block about-card-new">
+                    <div className="about-card-new">
                         <span className="card-number font-mono text-xs text-gray-400">[C]</span>
                         <h3 className="card-title">Mission</h3>
                         <p className="card-highlight">Build innovation and entrepreneurial mindset</p>
                         <p className="card-detail">Bring together students, startups, industry, government and mentors</p>
                         <p className="card-detail">Create solutions for India, with global relevance</p>
                     </div>
-                    <div className="about-block about-card-new">
+                    <div className="about-card-new">
                         <span className="card-number font-mono text-xs text-gray-400">[D]</span>
                         <h3 className="card-title">Vision</h3>
                         <p className="card-highlight">"Make campus innovation a launchpad"</p>
@@ -112,9 +72,9 @@ const About = () => {
                 </div>
 
                 {/* Objectives */}
-                <div className="about-block mt-16">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-6">Objectives</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="mt-24 about-animate">
+                    <h2 className="section-title mb-8">Objectives</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
                         <div className="text-gray-700">● Foster Innovation and Entrepreneurship culture among students.</div>
                         <div className="text-gray-700">● Promote Deep-Tech and Problem-Driven Innovation for national priorities.</div>
                         <div className="text-gray-700">● Connect talent with incubators, accelerators, and global industry.</div>
@@ -123,9 +83,37 @@ const About = () => {
                         <div className="text-gray-700">● Strengthen the ecosystem by enabling collaborations between government, industry, research institutions and startups.</div>
                     </div>
                 </div>
-            </div>
-        </section>
+
+                {/* Key Pillars */}
+                <div className="mt-24 about-animate">
+                    <h2 className="section-title mb-8">Key Pillars</h2>
+                    <div className="pillars-grid-new">
+                        {[
+                            { num: "01", title: "Showcase", desc: "Feature professional startups and student innovators with prototypes and live demos" },
+                            { num: "02", title: "Invest", desc: "Create curated investment opportunities with potential funding up to INR 10 Crores" },
+                            { num: "03", title: "Educate", desc: "Inform founders on policy, IP, regulations, and scaling deep-tech businesses" },
+                            { num: "04", title: "Connect", desc: "Strengthen collaborations between government, industry, and startups" },
+                        ].map((pillar, i) => (
+                            <div key={i} className="pillar-card-new">
+                                <span className="pillar-number">{pillar.num}</span>
+                                <h3 className="pillar-title-text">{pillar.title}</h3>
+                                <p className="pillar-desc">{pillar.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Target Audience */}
+                <div className="mt-24 about-animate">
+                    <h2 className="section-title mb-8">Target Audience</h2>
+                    <p className="text-gray-700 text-lg mb-6">
+                        Students, Researchers & PhD Scholars, Founders, Investors, Corporates, Government & Policy
+                        Makers, Industry Leaders, Academia, Incubators, Accelerators.
+                    </p>
+                </div>
+            </section>
+        </div>
     );
 };
 
-export default About;
+export default AboutPage;

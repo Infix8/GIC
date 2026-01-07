@@ -7,10 +7,19 @@ export default {
     theme: {
         extend: {
             colors: {
-                'gold': '#d4a853',
-                'gold-light': '#f4d794',
-                'bg-primary': '#0a0a12',
-                'bg-card': 'rgba(20, 20, 35, 0.6)',
+                // New Color Palette
+                'rose': '#C95386',
+                'olive': '#788008',
+                'violet': '#564FB0',
+                'crimson': '#6E0B36',
+                'midnight': '#421B2C',
+                // Legacy gold mapped to rose
+                'gold': '#C95386',
+                'gold-light': '#E178A9',
+                // Backgrounds
+                'bg-primary': '#1a0d14',
+                'bg-secondary': '#241520',
+                'bg-card': 'rgba(66, 27, 44, 0.6)',
             },
             fontFamily: {
                 'display': ['"Playfair Display"', 'serif'],

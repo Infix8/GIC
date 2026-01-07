@@ -140,7 +140,7 @@ const Contact = () => {
                             required
                             value={contactForm['entry.1331908454']}
                             onChange={handleContactChange}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition-colors"
+                            className="w-full bg-white/5 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:border-gold focus:outline-none transition-colors"
                         />
                         <input
                             type="email"
@@ -149,7 +149,7 @@ const Contact = () => {
                             required
                             value={contactForm['entry.299383262']}
                             onChange={handleContactChange}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition-colors"
+                            className="w-full bg-white/5 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:border-gold focus:outline-none transition-colors"
                         />
                         <input
                             type="tel"
@@ -158,7 +158,7 @@ const Contact = () => {
                             required
                             value={contactForm['entry.1599555423']}
                             onChange={handleContactChange}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition-colors"
+                            className="w-full bg-white/5 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:border-gold focus:outline-none transition-colors"
                         />
                         <input
                             type="text"
@@ -167,7 +167,7 @@ const Contact = () => {
                             required
                             value={contactForm['entry.1708222522']}
                             onChange={handleContactChange}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition-colors"
+                            className="w-full bg-white/5 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:border-gold focus:outline-none transition-colors"
                         />
                         <textarea
                             name="entry.1480851550"
@@ -176,7 +176,7 @@ const Contact = () => {
                             required
                             value={contactForm['entry.1480851550']}
                             onChange={handleContactChange}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-gold focus:outline-none transition-colors resize-none"
+                            className="w-full bg-white/5 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:border-gold focus:outline-none transition-colors resize-none"
                         ></textarea>
                         <button
                             type="submit"
